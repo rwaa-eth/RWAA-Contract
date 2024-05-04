@@ -17,6 +17,8 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
+		"@tokenscript/card-sdk": "^1.2.0",
+		"@types/crypto-js": "^4.2.2",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"eslint": "^8.28.0",
@@ -34,6 +36,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"avail-js-sdk": "^0.2.12"
+		"avail-js-sdk": "^0.2.12",
+		"crypto-js": "^4.2.0",
+		"ethers": "^6.12.1"
 	}
 }

@@ -1,32 +1,34 @@
-
 <script lang="ts">
-	import context from "./lib/context";
-	import Info from "./routes/Info.svelte";
-	import NotFound from "./routes/NotFound.svelte";
+	import context from './lib/context';
+	import Info from './routes/Info.svelte';
+	import NotFound from './routes/NotFound.svelte';
 
-	import Mint from "./routes/Mint.svelte";
-	import Hello from "./routes/Hello.svelte";
+	import Hello from './routes/Hello.svelte';
+	import CreateDocument from './routes/CreateDocument.svelte';
+	import Share from './routes/Share.svelte';
+	import ManageSharing from './routes/ManageSharing.svelte';
+	import View from './routes/View.svelte';
 
 	let token;
 	let initialised = false;
 
 	const routingMap = {
-		'#info': Info,
-		'#mint': Mint,
-		'#hello': Hello
+		'#info': View,
+		'#share': Share,
+		'#hello': Hello,
+		'#manage-sharing': ManageSharing,
+		'#create-document': CreateDocument
 	};
 
 	let page;
 
 	function routeChange() {
-		page = routingMap[token.level == 0 ? "#adopt" : document.location.hash] || NotFound;
+		page = routingMap[token.level == 0 ? '#adopt' : document.location.hash] || NotFound;
 	}
 
 	// @ts-ignore
 	web3.tokens.dataChanged = async (oldTokens, updatedTokens, cardId) => {
-
-		if (initialised)
-			return;
+		if (initialised) return;
 
 		context.setToken(updatedTokens.currentInstance);
 		token = updatedTokens.currentInstance;
@@ -35,7 +37,6 @@
 
 		routeChange();
 	};
-
 </script>
 
 <svelte:window on:hashchange={routeChange} />

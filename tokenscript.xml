@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ts:token xmlns:ts="http://tokenscript.org/2022/09/tokenscript"
-		  xmlns:xml="http://www.w3.org/XML/1998/namespace"
-		  xsi:schemaLocation="http://tokenscript.org/2022/09/tokenscript https://www.tokenscript.org/schemas/2022-09/tokenscript.xsd"
-		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		  xmlns:ethereum="urn:ethereum:constantinople"
-		  name="rwaa_v2">
+<ts:token xmlns:ts="http://tokenscript.org/2024/01/tokenscript"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	xsi:schemaLocation="http://tokenscript.org/2024/01/tokenscript https://www.tokenscript.org/schemas/2024-01/tokenscript.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ethereum="urn:ethereum:constantinople"
+	name="rwaa_v2">
 	<ts:label>
 		<ts:plurals xml:lang="en">
-			<ts:string quantity="one">rwaa_v2 Token</ts:string>
-			<ts:string quantity="other">rwaa_v2 Tokens</ts:string>
+			<ts:string quantity="one">RWAA ETH</ts:string>
+			<ts:string quantity="other">RWAA ETH</ts:string>
 		</ts:plurals>
 	</ts:label>
 	<ts:meta>
@@ -17,17 +17,68 @@
 		<ts:iconUrl xml:lang="en"> </ts:iconUrl>
 	</ts:meta>
 	<ts:contract interface="erc721" name="Token">
-		<ts:address network="11155111">0x4E483c5dD7a96e72fF7516dcD3F827a3eD858216</ts:address>
+		<ts:address network="11155111">0xb6a66d1B4C5627E2E7e72eE4Ec019de5a00830C2</ts:address>
+		<ts:abi>
+    <![CDATA[
+	[
+   {
+      "inputs":[
+         {
+            "internalType":"uint256",
+            "name":"tokenId",
+            "type":"uint256"
+         }
+      ],
+      "name":"getTokenInfo",
+      "outputs":[
+         {
+            "components":[
+               {
+                  "internalType":"uint256",
+                  "name":"docId",
+                  "type":"uint256"
+               },
+               {
+                  "internalType":"bool",
+                  "name":"isParent",
+                  "type":"bool"
+               },
+               {
+                  "internalType":"uint256",
+                  "name":"parentTokenId",
+                  "type":"uint256"
+               },
+               {
+                  "internalType":"uint256[]",
+                  "name":"readbleTokenIds",
+                  "type":"uint256[]"
+               }
+            ],
+            "internalType":"struct RWAAV1.TokenInfo",
+            "name":"",
+            "type":"tuple"
+         }
+      ],
+      "stateMutability":"view",
+      "type":"function"
+   }
+]
+    ]]>
+</ts:abi>
 	</ts:contract>
 	<ts:origins>
 		<!-- Define the contract which holds the token that the user will use -->
-		<ts:ethereum contract="Token"/>
+		<ts:ethereum contract="Token" />
 	</ts:origins>
-
+	<ts:selection name="isNotParent" filter="isParent=FALSE">
+		<ts:label>
+			<ts:string xml:lang="en">You are not the document owner!</ts:string>
+		</ts:label>
+	</ts:selection>
 	<ts:cards>
 		<ts:viewContent name="common" xmlns="http://www.w3.org/1999/xhtml">
-			<ts:include type="html" src="./dist/index.html"/>
-			<ts:include type="css" src="./src/styles.css"/>
+			<ts:include type="html" src="./dist/index.html" />
+			<ts:include type="css" src="./src/styles.css" />
 		</ts:viewContent>
 
 		<ts:card type="token" name="Info" origins="Token">
@@ -35,34 +86,86 @@
 				<ts:string xml:lang="en">Info</ts:string>
 			</ts:label>
 			<ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" urlFragment="info">
-				<ts:viewContent name="common"/>
+				<ts:viewContent name="common" />
 			</ts:view>
 		</ts:card>
 
-		<ts:card type="action" name="Mint">
+		<ts:card type="action" name="Share" exclude="isNotParent">
 			<ts:label>
-				<ts:string xml:lang="en">Mint</ts:string>
+				<ts:string xml:lang="en">Share</ts:string>
 			</ts:label>
-			<ts:transaction>
+			<!-- <ts:transaction>
 				<ethereum:transaction contract="Token" function="safeMint">
 					<ts:data>
 					</ts:data>
 				</ethereum:transaction>
-			</ts:transaction>
-			<ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" urlFragment="mint">
-				<ts:viewContent name="common"/>
+			</ts:transaction> -->
+			<ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" urlFragment="share">
+				<ts:viewContent name="common" />
 			</ts:view>
 		</ts:card>
 
-			<ts:card type="action" name="Hello">
+		<ts:card type="action" name="ManageShares" exclude="isNotParent">
+			<ts:label>
+				<ts:string xml:lang="en">Manage Sharing</ts:string>
+			</ts:label>
+			<!-- <ts:transaction>
+				<ethereum:transaction contract="Token" function="safeMint">
+					<ts:data>
+					</ts:data>
+				</ethereum:transaction>
+			</ts:transaction> -->
+			<ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" urlFragment="manage-sharing">
+				<ts:viewContent name="common" />
+			</ts:view>
+		</ts:card>
+
+		<!-- <ts:card type="action" name="Hello">
 			<ts:label>
 				<ts:string xml:lang="en">Hello</ts:string>
 			</ts:label>
 			<ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" urlFragment="hello">
-				<ts:viewContent name="common"/>
+				<ts:viewContent name="common" />
+			</ts:view>
+		</ts:card> -->
+		<ts:card type="onboarding" name="CreateDocument">
+			<ts:label>
+				<ts:string xml:lang="en">Create Document</ts:string>
+			</ts:label>
+			<ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+				urlFragment="create-document">
+				<ts:viewContent name="common" />
 			</ts:view>
 		</ts:card>
-
 	</ts:cards>
+
+	<ts:attribute name="isParent">
+		<ts:type>
+			<ts:syntax>1.3.6.1.4.1.1466.115.121.1.7</ts:syntax>
+		</ts:type>
+		<ts:label>
+			<ts:string xml:lang="en">Is Parent</ts:string>
+		</ts:label>
+		<ts:origins>
+			<ts:data ref="customTokenInfo.isParent" />
+		</ts:origins>
+	</ts:attribute>
+
+
+	<ts:attribute name="customTokenInfo">
+		<ts:type>
+			<ts:syntax>1.3.6.1.4.1.1466.115.121.1.27</ts:syntax>
+		</ts:type>
+		<ts:label>
+			<ts:string xml:lang="en">Token Info</ts:string>
+		</ts:label>
+		<ts:origins>
+			<ethereum:call function="getTokenInfo" contract="Token" as="abi">
+				<ts:data>
+					<ts:uint256 ref="tokenId" />
+				</ts:data>
+			</ethereum:call>
+		</ts:origins>
+	</ts:attribute>
 
 </ts:token>
