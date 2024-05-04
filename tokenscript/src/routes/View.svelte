@@ -96,7 +96,7 @@
 	const decrypt = async () => {
 		loading = true;
 
-		const { data: challenge } = await fetch('http://localhost:8080/challenge').then((res) =>
+		const { data: challenge } = await fetch('https://ra.ath.cx/challenge').then((res) =>
 			res.json()
 		);
 		console.log('challenge', challenge);
@@ -109,7 +109,7 @@
 				return null;
 			}
 			console.log('personal.sign data', sig);
-			const { data: aesKey } = await fetch('http://localhost:8080/verify', {
+			const { data: aesKey } = await fetch('https://ra.ath.cx/verify', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
