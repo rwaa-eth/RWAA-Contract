@@ -112,7 +112,7 @@
 		console.log('docId', docId);
 
 		try {
-			const response = await fetch('https://ra.ath.cx/register-key', {
+			const response = await fetch('http://localhost:8080/register-key', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

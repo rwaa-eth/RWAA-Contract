@@ -1,9 +1,7 @@
 <script lang="ts">
 	import context from './lib/context';
-	import Info from './routes/Info.svelte';
 	import NotFound from './routes/NotFound.svelte';
 
-	import Hello from './routes/Hello.svelte';
 	import CreateDocument from './routes/CreateDocument.svelte';
 	import Share from './routes/Share.svelte';
 	import ManageSharing from './routes/ManageSharing.svelte';
@@ -15,7 +13,6 @@
 	const routingMap = {
 		'#info': View,
 		'#share': Share,
-		'#hello': Hello,
 		'#manage-sharing': ManageSharing,
 		'#create-document': CreateDocument
 	};

@@ -8,7 +8,7 @@ import {
 } from 'ethers';
 
 export class RWAAContract {
-	private static CONTRACT_ADDR = '0xb6a66d1B4C5627E2E7e72eE4Ec019de5a00830C2';
+	private static CONTRACT_ADDR = '0xefAB18061C57C458c52661f50f5b83B600392ed6';
 	private static CONTRACT_ABI = [
 		{
 			inputs: [

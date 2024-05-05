@@ -17,7 +17,7 @@
 		<ts:iconUrl xml:lang="en"> </ts:iconUrl>
 	</ts:meta>
 	<ts:contract interface="erc721" name="Token">
-		<ts:address network="11155111">0xb6a66d1B4C5627E2E7e72eE4Ec019de5a00830C2</ts:address>
+		<ts:address network="11155111">0xefAB18061C57C458c52661f50f5b83B600392ed6</ts:address>
 		<ts:abi>
     <![CDATA[
 	[

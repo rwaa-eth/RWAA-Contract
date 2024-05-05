@@ -65,8 +65,19 @@
 		</div>
 		<pre>{JSON.stringify(token, null, 2)}</pre>
 	{/if} -->
-	<div>
-		<input type="text" bind:value={shareAddress} placeholder="Share Address" />
+	<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+		<h2 style="font-size: 24px; color: #333; font-weight: bold; text-align: center;">
+			📤 Enter Share Address
+		</h2>
+		<p style="font-size: 16px; color: #666; text-align: center;">
+			👉 Please provide the address to share your document with.
+		</p>
+		<input
+			type="text"
+			bind:value={shareAddress}
+			placeholder="🏠 Share Address"
+			style="padding: 15px; width: 80%; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; margin-top: 10px;"
+		/>
 	</div>
 	<div />
 	<Loader show={loading} />

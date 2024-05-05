@@ -65,23 +65,40 @@
 		<pre>{JSON.stringify(token, null, 2)}</pre>
 	{/if} -->
 	<!-- <pre>{JSON.stringify(readableAddresses, null, 2)}</pre> -->
-
 	{#if readableAddresses.length > 0}
-		<div style="display: flex; justify-content: center; margin: 20px;">
-			<table style="margin: 20px; width: auto; max-width: 90%;">
-				<tr>
-					<th>Index</th>
-					<th>Address</th>
-					<th>Action</th>
+		<div style="display: flex; flex-direction: column; align-items: center; margin: 20px;">
+			<h2 style="font-size: 24px; color: #333; font-weight: bold; text-align: center;">
+				🔗 Share Access
+			</h2>
+			<p style="font-size: 16px; color: #666;  text-align: center;">
+				See who you've shared your document with and manage access.
+			</p>
+			<table style="width: 90%; border-collapse: collapse; margin-top: 20px;">
+				<tr style="background-color: #eee; color: block; text-align: center; font-weight: 300; ">
+					<th style="font-weight: 300; ">🔢 Index</th>
+					<th style="font-weight: 300; ">🏠 Address</th>
+					<th style="font-weight: 300; ">🛠️ Action</th>
 				</tr>
 				{#each readableAddresses as address, index}
-					<tr>
-						<td>{index + 1}</td>
-						<td>{address.ownerAddress.slice(0, 6) + '...' + address.ownerAddress.slice(-4)}</td>
-						<td><button on:click={() => cancelOwnership(address.tokenId)}>Revoke</button></td>
+					<tr style="border-bottom: 1px solid #ddd;">
+						<td style="padding: 8px; text-align: center;">{index + 1}</td>
+						<td style="padding: 8px; text-align: center;"
+							>{address.ownerAddress.slice(0, 6) + '...' + address.ownerAddress.slice(-4)}</td
+						>
+						<td style="padding: 8px; text-align: center;"
+							><button
+								on:click={() => cancelOwnership(address.tokenId)}
+								style="padding: 5px 10px; border-radius: 5px; background-color: #f44336; color: white; border: none; cursor: pointer;"
+								>🚫 Revoke</button
+							></td
+						>
 					</tr>
 				{/each}
 			</table>
+		</div>
+	{:else}
+		<div style="text-align: center; margin: 20px; font-size: 16px; color: #666;">
+			<p>🔗 <strong>No shares yet!</strong> Head back and click <em>Share</em> to start sharing.</p>
 		</div>
 	{/if}
 

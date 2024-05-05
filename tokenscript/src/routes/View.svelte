@@ -96,7 +96,7 @@
 	const decrypt = async () => {
 		loading = true;
 
-		const { data: challenge } = await fetch('https://ra.ath.cx/challenge').then((res) =>
+		const { data: challenge } = await fetch('http://localhost:8080/challenge').then((res) =>
 			res.json()
 		);
 		console.log('challenge', challenge);
@@ -109,7 +109,7 @@
 				return null;
 			}
 			console.log('personal.sign data', sig);
-			const { data: aesKey } = await fetch('https://ra.ath.cx/verify', {
+			const { data: aesKey } = await fetch('http://localhost:8080/verify', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -139,27 +139,42 @@
 
 <div>
 	{#if docName}
-		<h2>Document: {docName}</h2>
-		<h3>ID: {docId}</h3>
+		<h2 style="color: #333; font-size: 24px; font-weight: bold;">Document: {docName}</h2>
+		<h3 style="color: #666; font-size: 18px;">ID: {docId}</h3>
 	{/if}
 	{#if encryptedDocContent}
-		<div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-			<h3>Here is the content</h3>
-			<p>encryptedDocContent: {encryptedDocContent.slice(0, 15) + '...'}</p>
-			<p>blockHash: {blockHash?.slice(0, 10) + '...'}</p>
-			<a href={`https://explorer.avail.so/#/explorer/query/${blockHash}`} target="_blank"
-				>See on Explorer</a
+		<div
+			style="text-align: center; display: flex; flex-direction: column; align-items: center; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
+		>
+			<h3 style="color: #444; margin-bottom: 10px;">📄 Here is the content</h3>
+			<p style="color: #555;">🔒 encryptedDocContent: {encryptedDocContent.slice(0, 15) + '...'}</p>
+			<p style="color: #555;">🔗 blockHash: {blockHash?.slice(0, 10) + '...'}</p>
+			<a
+				href={`https://explorer.avail.so/#/explorer/query/${blockHash}`}
+				target="_blank"
+				style="color: #0077cc; text-decoration: none; margin-bottom: 5px;"
 			>
-			<p>txHash: {txHash?.slice(0, 10) + '...'}</p>
-			<a href={`https://explorer.avail.so/#/explorer/query/${txHash}`} target="_blank"
-				>See on Explorer</a
+				🔍 See on Explorer
+			</a>
+			<p style="color: #555;">🔗 txHash: {txHash?.slice(0, 10) + '...'}</p>
+			<a
+				href={`https://explorer.avail.so/#/explorer/query/${txHash}`}
+				target="_blank"
+				style="color: #0077cc; text-decoration: none; margin-bottom: 15px;"
 			>
-			<br />
-			<button on:click={decrypt}>Decrypt</button>
+				🔍 See on Explorer
+			</a>
+			<hr />
+			<button
+				on:click={decrypt}
+				style="padding: 10px 40px; margin-top: 30px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;"
+			>
+				🔓 Decrypt
+			</button>
 			{#if decryptedDocContent}
-				<div>
-					<h3>Decrypted Content:</h3>
-					<p>{decryptedDocContent}</p>
+				<div style="margin-top: 15px;">
+					<h3 style="color: #444;">🔓 Decrypted Content:</h3>
+					<p style="color: #555;">{decryptedDocContent}</p>
 				</div>
 			{/if}
 		</div>
